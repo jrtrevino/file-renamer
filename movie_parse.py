@@ -8,13 +8,17 @@ def create_movie_object(info_arr):
     temp_movie_obj = movie.Movie(info_arr["title"], info_arr["year"])
     temp_movie_obj.add_codec(info_arr["codec"])
     temp_movie_obj.add_quality(info_arr["quality"])
+    temp_movie_obj.add_source(info_arr["source"])
     return temp_movie_obj
 
 # determines if current word in filename is considered a valid year.
 def find_year(dict, word):
     return_val = -1
-    if word.isnumeric():
-        num = int(word)
+    # remove possible parenthesis from year
+    new_word = word.replace("(", "")
+    newer_word = new_word.replace(")", "")
+    if newer_word.isnumeric():
+        num = int(newer_word)
         if (num > 1940 and num < 2030):
             year = num
             return_val = 1
@@ -24,7 +28,7 @@ def find_year(dict, word):
 # determines if current word in filename is a valid resolution.
 def find_quality(dict, word):
     if (word.lower() == "480p" or word.lower() == "720p" or
-     word.lower() == "1080p" or word.lower() == "2160p"):            
+     word.lower() == "1080p" or word.lower() == "2160p"):
         dict["quality"] = word
         return 1
     return -1
@@ -52,7 +56,10 @@ def find_title(file_array):
     file_info = {
         'title' : "",
         'year' : -1,
-        'quality' : ""}
+        'quality' : "",
+        'codec' : "",
+        'source' : ""}
+    # cycle through filename and match informaiton.
     for element in file_array:
         # check if number in filename is the year
         if (find_year(file_info, element)) == 1:
@@ -84,13 +91,23 @@ def split_file (filename):
     new_split = split_name.replace('-', " ")
     split_name = new_split.split(" ")
     return split_name
+
+
 # begins the process to parse movie information from a filename.
 def parse_movie(path):
+    # save directory information for renaming purposes.
     filename = os.path.basename(path)
+    dir = os.path.dirname(path) + "/"
+    # begin parsing!
     temp = split_file(filename)
     movie_info_array = find_title(temp)
     mov_obj = create_movie_object(movie_info_array)
-    print(mov_obj.search_string())
+    final_path = dir + mov_obj.search_string()
+    # rename!
+    os.rename(path, final_path)
+    #print(mov_obj.search_string())
+    # print(path, os.path.dirname(path))
+    return mov_obj
 
 # ensures the user inputted at least 1 file to be parsed.
 def check_arg():
@@ -99,7 +116,7 @@ def check_arg():
         print("Usage: movie_parse.py <inputfile> ...")
         return -1
     for id in range(1, num_files):
-        parse_movie(sys.argv[id])
+        new_name = parse_movie(sys.argv[id])
     return 0
 
 if __name__ == '__main__':
