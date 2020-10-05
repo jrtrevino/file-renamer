@@ -3,38 +3,96 @@ import sys
 import movie
 import re
 
+# returns a movie object containing information found from parsing.
+def create_movie_object(info_arr):
+    temp_movie_obj = movie.Movie(info_arr["title"], info_arr["year"])
+    temp_movie_obj.add_codec(info_arr["codec"])
+    temp_movie_obj.add_quality(info_arr["quality"])
+    return temp_movie_obj
+
+# determines if current word in filename is considered a valid year.
+def find_year(dict, word):
+    return_val = -1
+    if word.isnumeric():
+        num = int(word)
+        if (num > 1940 and num < 2030):
+            year = num
+            return_val = 1
+            dict["year"] = year
+    return return_val
+
+# determines if current word in filename is a valid resolution.
+def find_quality(dict, word):
+    if (word.lower() == "480p" or word.lower() == "720p" or
+     word.lower() == "1080p" or word.lower() == "2160p"):            
+        dict["quality"] = word
+        return 1
+    return -1
+
+# determines if current word in filename is a valid video codec.
+def find_codec(dict, word):
+    if (word.casefold() == "x264" or word.casefold() == "x265"
+    or "hevc" in word.casefold() or "xvid" in word.casefold()):
+        dict["codec"] = word
+        return 1
+    return -1
+
+# attempts to determines the source of a video based off of keywords.
+def find_source(dict, word):
+    if ("bluray" in word.casefold() or "dvdrip" in word.casefold()
+        or "hdtv" in word.casefold()):
+        dict["source"] = word
+        return 1
+    return -1
+
+# attempts to find the movie title through parsing.
 def find_title(file_array):
-    filename = ""
-    year = -1
+    title_found = False
+    filename = []
+    file_info = {
+        'title' : "",
+        'year' : -1,
+        'quality' : ""}
     for element in file_array:
         # check if number in filename is the year
-        if element.isnumeric():
-            num = int(element)
-            if (num > 1940 and num < 2030):
-                year = num
-                break
+        if (find_year(file_info, element)) == 1:
+            title_found = True # big assumption...
+            continue
+        elif find_quality(file_info, element) == 1:
+            title_found = True # big assumption...
+            continue
+        elif find_codec(file_info, element) == 1:
+            title_found = True # big assumption...
+            continue
+
+        elif find_source(file_info, element) == 1:
+            title_found = True # big assumption...
+            continue
+
         else:
-            filename += element
-            filename += " "
-    if year != -1 and len(filename) > 0:
-        return movie.Movie(filename, year)
-    return movie.Movie(filename, None)
+            if title_found == False:
+                filename.append(element)
+    final_name = " ".join(filename)
+
+    file_info["title"] = final_name
+    return file_info
 
 # returns an array with elements consisting of the file information/
 def split_file (filename):
     # check for spaces or periods.
     split_name = filename.replace('.', " ")
-    split_name = split_name.split(" ")
-
+    new_split = split_name.replace('-', " ")
+    split_name = new_split.split(" ")
     return split_name
-
+# begins the process to parse movie information from a filename.
 def parse_movie(path):
     filename = os.path.basename(path)
     temp = split_file(filename)
-    movie1 = find_title(temp)
-    print(movie1.search_string())
+    movie_info_array = find_title(temp)
+    mov_obj = create_movie_object(movie_info_array)
+    print(mov_obj.search_string())
 
-
+# ensures the user inputted at least 1 file to be parsed.
 def check_arg():
     num_files = len(sys.argv)
     if num_files == 1:
