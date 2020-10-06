@@ -6,7 +6,7 @@ In the future, a ping to a movie/tv database website will help enhace the renami
 
 Examples:
 
-If a video file has the title "The Lost Pyramids Of China 2020 1080p", FileRenamer will rename the file as "The Lost Pyramids Of China (2020)." Additionally, a movie object is created that has information regarding the title.
+If a video file has the title "The Lost Pyramids Of China 2020 1080p", FileRenamer will rename the file as "The Lost Pyramids Of China (2020)." Additionally, a movie object is created that has information regarding the title and year.
 
 Notes:
 
