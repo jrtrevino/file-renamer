@@ -96,13 +96,14 @@ def split_file (filename):
 # begins the process to parse movie information from a filename.
 def parse_movie(path):
     # save directory information for renaming purposes.
+    extension = "." + os.path.splitext(path)[1][1:]
     filename = os.path.basename(path)
     dir = os.path.dirname(path) + "/"
     # begin parsing!
     temp = split_file(filename)
     movie_info_array = find_title(temp)
     mov_obj = create_movie_object(movie_info_array)
-    final_path = dir + mov_obj.search_string()
+    final_path = dir + mov_obj.search_string() + extension
     # rename!
     os.rename(path, final_path)
     #print(mov_obj.search_string())
