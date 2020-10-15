@@ -18,6 +18,12 @@ class Movie:
         print("Movie Title:" + self.title)
         print("Movie Release: " + str(self.year))
 
+    def get_title(self):
+        return self.title
+
+    def get_year(self):
+        return self.year
+
     # returns the string used to search for a movie in a database.
     def search_string(self):
         if self.year != -1:
