@@ -1,7 +1,27 @@
 import os
 import sys
 import movie
+import db_search
 import re
+
+# top level function to begin parsing process.
+def begin_program():
+    num_files = len(sys.argv)
+    for id in range(1, num_files):
+        new_name = parse_movie(sys.argv[id])
+
+# begins the process to parse movie information from a filename.
+def parse_movie(path):
+    # check for file existance.
+    if not (check_path_existance(path)):
+        return -1
+    # begin parsing!
+    filename = os.path.basename(path)
+    temp = split_file(filename)
+    movie_info_array = find_movie_info(temp)
+    mov_obj = create_movie_object(movie_info_array)
+    rename_movie(path, mov_obj)
+    return mov_obj
 
 # returns a movie object containing information found from parsing.
 def create_movie_object(info_arr):
@@ -50,7 +70,7 @@ def find_source(dict, word):
     return -1
 
 # attempts to find the movie title through parsing.
-def find_title(file_array):
+def find_movie_info(file_array):
     title_found = False
     filename = []
     file_info = {
@@ -92,33 +112,36 @@ def split_file (filename):
     split_name = new_split.split(" ")
     return split_name
 
-
-# begins the process to parse movie information from a filename.
-def parse_movie(path):
-    # save directory information for renaming purposes.
+# creates path for movie and renames old file.
+def rename_movie(path, movie):
+    # find path directory and extension to properly name.
     extension = "." + os.path.splitext(path)[1][1:]
-    filename = os.path.basename(path)
     dir = os.path.dirname(path) + "/"
-    # begin parsing!
-    temp = split_file(filename)
-    movie_info_array = find_title(temp)
-    mov_obj = create_movie_object(movie_info_array)
-    final_path = dir + mov_obj.search_string() + extension
-    # rename!
-    os.rename(path, final_path)
-    #print(mov_obj.search_string())
-    # print(path, os.path.dirname(path))
-    return mov_obj
+    # we will ping themoviedb.org to get the movie title from parsed
+    # info from the given file.
+    db_search.search_for_movie(movie)
+    final_name = dir + movie.search_string() + extension
+    os.rename(path, final_name)
+
+# checks if file exists. If not, next file (if any) begin parsing.
+def check_path_existance(path_to_file):
+    if(os.path.exists(path_to_file)):
+        return True
+    else:
+        (print("movie_parse: File does not exist: "
+        + str(path_to_file)))
+        return False
 
 # ensures the user inputted at least 1 file to be parsed.
 def check_arg():
     num_files = len(sys.argv)
     if num_files == 1:
-        print("Usage: movie_parse.py <inputfile> ...")
-        return -1
-    for id in range(1, num_files):
-        new_name = parse_movie(sys.argv[id])
-    return 0
+        print("Usage: movie_parse.py <fileA> <fileB> ...")
+        return 0
+    return num_files
 
 if __name__ == '__main__':
-    check_arg()
+    if (check_arg()):
+        begin_program()
+    else:
+        sys.exit(-1)
