@@ -2,7 +2,7 @@ FileRenamer is a simple python3 program to parse movie files into a readable for
 
 Usage: python3 movie_parse.py filename-a filename-b filename-c ...
 
-In the future, a ping to a movie/tv database website will help enhace the renaming process if information cannot be found.
+In the future, a ping to a movie/tv database website will help enhance the renaming process if information cannot be found.
 
 Examples:
 
