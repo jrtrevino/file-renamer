@@ -4,7 +4,7 @@
 import tmdbsimple as tmdb
 import movie
 
-tmdb.API_KEY = 'e9316003ecb292af5e895d5c58f36f4e'
+tmdb.API_KEY = ''
 
 def search_for_movie(mov_obj):
     # create search_obj
