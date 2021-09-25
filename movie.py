@@ -3,12 +3,12 @@ class Movie:
 
     title = ""
     year = -1
-    codec = "" # Xvid, h264, h265, etc.
-    quality = "" # 720p, 1080p, 2160p, etc.
-    uploader = "" # name of the file uploader
-    source = "" # dvdRip, blurayRip, HDTV, etc.
+    codec = ""  # Xvid, h264, h265, etc.
+    quality = ""  # 720p, 1080p, 2160p, etc.
+    uploader = ""  # name of the file uploader
+    source = ""  # dvdRip, blurayRip, HDTV, etc.
 
-    def __init__ (self, title, year):
+    def __init__(self, title, year):
         self.title = title
         if year == None:
             self.year = -1
@@ -28,9 +28,12 @@ class Movie:
     def search_string(self):
         if self.year != -1:
             return (str(self.title +
-            " (" + str(self.year)) + ")")
+                        " (" + str(self.year)) + ")")
         else:
             return self.title
+
+    def set_title(self, title):
+        self.title = title
 
     def add_codec(self, codec_type):
         self.codec = codec_type
