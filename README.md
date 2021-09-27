@@ -2,8 +2,11 @@
 
 FileRenamer is a simple python3 program to parse movie files into a readable format. It is currently in development with hopes of supporting TV show parsing.
 
-Usage: python3 movie_parse.py filename-a filename-b filename-c ...
+Usage: 
 
+```
+python3 movie_parse.py filename-a filename-b filename-c ...
+```
 ## TMDB API
 To further enhance results, a query is sent to the TMDB API. This allows the user to select which movie to rename the file to in cases where parsing wasn't successful. To use this feature, please provide a TMDB API Key which can be obtained here:
 
@@ -11,9 +14,11 @@ https://www.themoviedb.org/documentation/api
 
 ## Examples
 
-### python3 movie_parse The.Lost.Pyramids.Of.China.2020.1080p.mp4
-### >> The Lost Pyramids of China (2020).mp4
+```
+python3 movie_parse The.Lost.Pyramids.Of.China.2020.1080p.mp4
+>> The Lost Pyramids of China (2020).mp4
 
+```
 If a video file has the title "The.Lost.Pyramids.Of.China.2020.1080p", FileRenamer will rename the file as "The Lost Pyramids Of China (2020)." Additionally, a movie object is created that has information regarding the title and year in case a user wants that functionality.
 
 In cases where the movie title is ambiguous (namely, no year was found in the title), a search to the TMDB API is made to help determine the correct name of the movie. For example, the Movie 'The Matrix', is ambiguous because there are many potential choices of what to rename the file to. In this case, the program prints out the following output:
