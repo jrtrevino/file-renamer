@@ -51,7 +51,7 @@ python3 movie_parse The.Matrix.mp4
 Please enter the number of the movie to rename the file to. Or -1 to cancel.
 >> 0
 
-Renamed file to: The Matrix (1999)
+Renamed file to: The Matrix (1999).mp4
 ```
 
 The user will then select the appropriate name of the movie to rename the file to.
