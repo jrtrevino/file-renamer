@@ -18,7 +18,9 @@ If a video file has the title "The.Lost.Pyramids.Of.China.2020.1080p", FileRenam
 
 In cases where the movie title is ambiguous (namely, no year was found in the title), a search to the TMDB API is made to help determine the correct name of the movie. For example, the Movie 'The Matrix', is ambiguous because there are many potential choices of what to rename the file to. In this case, the program prints out the following output:
 
-###  python3 movie_parse The.Matrix.mp4 
+```
+python3 movie_parse The.Matrix.mp4 
+
 >> 42  total search results. Listing Titles...
 [0] The Matrix 1999-03-30
 [1] The Matrix Resurrections 2021-12-15
@@ -42,5 +44,6 @@ In cases where the movie title is ambiguous (namely, no year was found in the ti
 [19] Cable Two's The Matrix 
 
 Please enter the number of the movie to rename the file to. Or -1 to cancel.
+```
 
 The user will then select the appropriate name of the movie to rename the file to.
