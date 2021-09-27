@@ -1,7 +1,7 @@
 # used tmdbsimple wrapper created by celiao.
 # https://github.com/celiao/tmdbsimple/
 import movie
-import secrets
+import secrets # remove this and place your api key in the variable below
 import sys
 
 try:
