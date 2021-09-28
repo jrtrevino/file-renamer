@@ -15,8 +15,8 @@ https://www.themoviedb.org/documentation/api
 ## Examples
 
 ```
-python3 movie_parse The.Lost.Pyramids.Of.China.2020.1080p.mp4
->> The Lost Pyramids of China (2020).mp4
+>> python3 movie_parse The.Lost.Pyramids.Of.China.2020.1080p.mp4
+The Lost Pyramids of China (2020).mp4
 
 ```
 If a video file has the title "The.Lost.Pyramids.Of.China.2020.1080p", FileRenamer will rename the file as "The Lost Pyramids Of China (2020)." Additionally, a movie object is created that has information regarding the title and year in case a user wants that functionality.
@@ -24,9 +24,9 @@ If a video file has the title "The.Lost.Pyramids.Of.China.2020.1080p", FileRenam
 In cases where the movie title is ambiguous (namely, no year was found in the title), a search to the TMDB API is made to help determine the correct name of the movie. For example, the Movie 'The Matrix', is ambiguous because there are many potential choices of what to rename the file to. In this case, the program prints out the following output:
 
 ```
-python3 movie_parse The.Matrix.mp4 
+>> python3 movie_parse The.Matrix.mp4 
 
->> 42  total search results. Listing Titles...
+42  total search results. Listing Titles...
 [0] The Matrix 1999-03-30
 [1] The Matrix Resurrections 2021-12-15
 [2] The Matrix Reloaded 2003-05-15
