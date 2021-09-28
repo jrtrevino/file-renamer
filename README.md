@@ -5,7 +5,7 @@ FileRenamer is a simple python3 program to parse movie files into a readable for
 Usage: 
 
 ```
-python3 movie_parse.py filename-a filename-b filename-c ...
+>> python3 movie_parse.py filename-a filename-b filename-c ...
 ```
 ## TMDB API
 To further enhance results, a query is sent to the TMDB API. This allows the user to select which movie to rename the file to in cases where parsing wasn't successful. To use this feature, please provide a TMDB API Key which can be obtained here:
