@@ -26,7 +26,7 @@ In cases where the movie title is ambiguous (namely, no year was found in the ti
 ```
 >> python3 movie_parse The.Matrix.mp4 
 
-42  total search results. Listing Titles...
+19  total search results. Listing Titles...
 [0] The Matrix 1999-03-30
 [1] The Matrix Resurrections 2021-12-15
 [2] The Matrix Reloaded 2003-05-15
@@ -53,5 +53,3 @@ Please enter the number of the movie to rename the file to. Or -1 to cancel.
 
 Renamed file to: The Matrix (1999).mp4
 ```
-
-The user will then select the appropriate name of the movie to rename the file to.
