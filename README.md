@@ -1,6 +1,6 @@
 # FileRenamer
 
-FileRenamer is a simple python3 program to parse movie files into a readable format. It is currently in development with hopes of supporting TV show parsing.
+FileRenamer is a small Python program to parse movie files into a readable format.
 
 Usage: 
 
