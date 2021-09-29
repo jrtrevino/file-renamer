@@ -12,7 +12,7 @@ To further enhance results, a query is sent to the TMDB API. This allows the use
 
 Once you have the API key, download the TMDB simple wrapper. Instructions on how to download can be found on [celiao's Github page].
 
-When the wrapper is downloaded, open up db_search.py and dedit the following line to contain your api key:
+When the wrapper is downloaded, open up db_search.py and edit the following line to contain your api key:
 
 ```
 tmdb.API_KEY = 'YOUR API KEY HERE'
