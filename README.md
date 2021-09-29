@@ -8,7 +8,7 @@ Usage:
 $ python3 movie_parse.py filename-a filename-b filename-c ...
 ```
 ## TMDB API
-To further enhance results, a query is sent to the TMDB API. This allows the user to select which movie to rename the file to in cases where parsing wasn't successful. To use this feature, please acquire TMDB API Key (free for development/personal use) [which can be obtained here].
+To further enhance results, a query is sent to the TMDB API. This allows the user to select which movie to rename the file to in cases where parsing wasn't successful. To use this feature, please acquire a TMDB API Key (free for development/personal use) [which can be obtained here].
 
 Once you have the API key, download the TMDB simple wrapper. Instructions on how to download can be found on [celiao's Github page].
 
