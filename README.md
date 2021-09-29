@@ -5,17 +5,24 @@ FileRenamer is a simple python3 program to parse movie files into a readable for
 Usage: 
 
 ```
->> python3 movie_parse.py filename-a filename-b filename-c ...
+$ python3 movie_parse.py filename-a filename-b filename-c ...
 ```
 ## TMDB API
-To further enhance results, a query is sent to the TMDB API. This allows the user to select which movie to rename the file to in cases where parsing wasn't successful. To use this feature, please provide a TMDB API Key which can be obtained here:
+To further enhance results, a query is sent to the TMDB API. This allows the user to select which movie to rename the file to in cases where parsing wasn't successful. To use this feature, please acquire TMDB API Key (free for development/personal use) [which can be obtained here].
 
-https://www.themoviedb.org/documentation/api
+Once you have the API key, download the TMDB simple wrapper. Instructions on how to download can be found on [celiao's Github page].
+
+When the wrapper is downloaded, open up db_search.py and dedit the following line to contain your api key:
+
+```
+tmdb.API_KEY = 'YOUR API KEY HERE'
+```
+Once that is set, you are ready to run!
 
 ## Examples
 
 ```
->> python3 movie_parse The.Lost.Pyramids.Of.China.2020.1080p.mp4
+$ python3 movie_parse The.Lost.Pyramids.Of.China.2020.1080p.mp4
 The Lost Pyramids of China (2020).mp4
 
 ```
@@ -24,7 +31,7 @@ If a video file has the title "The.Lost.Pyramids.Of.China.2020.1080p", FileRenam
 In cases where the movie title is ambiguous (namely, no year was found in the title), a search to the TMDB API is made to help determine the correct name of the movie. For example, the Movie 'The Matrix', is ambiguous because there are many potential choices of what to rename the file to. In this case, the program prints out the following output:
 
 ```
->> python3 movie_parse The.Matrix.mp4 
+$ python3 movie_parse The.Matrix.mp4 
 
 19  total search results. Listing Titles...
 [0] The Matrix 1999-03-30
@@ -53,3 +60,6 @@ Please enter the number of the movie to rename the file to. Or -1 to cancel.
 
 Renamed file to: The Matrix (1999).mp4
 ```
+
+[which can be obtained here]: https://www.themoviedb.org/documentation/api
+[celiao's Github page]: https://github.com/celiao/tmdbsimple
